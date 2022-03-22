@@ -1,0 +1,30 @@
+.start-container {
+  border-radius: 25px;
+  border: 2px solid black;
+  padding: 20px;
+  width: 200px;
+  height: 150px;
+  margin-left: auto;
+	margin-right: auto;
+  background-color: lightgrey;
+}
+
+.button-container {
+  width: 50%;
+	height: 20%;
+	/* Centering box horizontally inside of box-container */
+	margin: 0 auto;
+	/* Centering the element inside the box */
+	display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+button {
+  background-color: coral;
+  border-radius: 10px;
+  width: 75%;
+  height: 25%;
+  margin-left: auto;
+  margin-right: auto;
+}
