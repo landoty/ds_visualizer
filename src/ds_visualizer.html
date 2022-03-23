@@ -16,16 +16,17 @@
     <div id="visualizer-navbar" class="navbar" style="display:block;">
       <a id="title-a">EECS 448: Data Structure Visualizer</a>
       <div class="dropdown">
-        <button class="dropbtn">Data Structures
+        <button class="dropbtn" onclick="dropdown_buttons()">Data Structures
           <i class="fa fa-caret-down"></i>
         </button>
-        <div class="dropdown-content">
-          <a>Stack<a>
-          <a>Queue<a>
-          <a>Linked List<a>
+        <div class="dropdown-content" id="dropdown-menu">
+          <a>Stack</a>
+          <a>Queue</a>
+          <a>Linked List</a>
           <a>Binary Search Tree</a>
         </div>
       </div>
     </div>
   </body>
+  <script type="text/javascript" src="./static/visualizer.js"></script>
 </html>
