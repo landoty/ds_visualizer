@@ -20,13 +20,19 @@
           <i class="fa fa-caret-down"></i>
         </button>
         <div class="dropdown-content" id="dropdown-menu">
-          <a>Stack</a>
+          <a onClick="moveToStack()">Stack</a>
           <a>Queue</a>
           <a>Linked List</a>
           <a>Binary Search Tree</a>
         </div>
       </div>
     </div>
+    <div id="stack-page" style="display:none;">
+        <button class="stackbtn">PUSH</button>
+        <button class="stackbtn">POP</button>
+        <button class="stackbtn">PEEK</button>
+    </div>
+    <canvas id="canvas"></canvas>
   </body>
   <script type="text/javascript" src="./static/visualizer.js"></script>
 </html>
