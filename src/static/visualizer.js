@@ -1,3 +1,5 @@
+var data_structure = 0; //Stack = 1, Queue = 2, etc..
+
 function dropdown_buttons() {
   document.getElementById("dropdown-menu").classList.toggle("show");
 }
@@ -20,32 +22,16 @@ window.onclick = function(event) {
   }
 }
 
-/*function printStack(stack) {
-  const canvas = document.getElementById("canvas");
-  const ctx = canvas.getContext('2d');
-  ctx.textAlign - 'center';
-  ctx.textBaseline = 'middle';
-  ctx.font = "100px Arial";
-  ctx.fillStyle = 'black';
-  ctx.fillText(stack[0], 50, 50);
-}*/
-
 function moveToStack() {
-  /*const canvas = document.getElementById("canvas");
-  const ctx = canvas.getContext('2d');
-  ctx.textAlign - 'center';
-  ctx.textBaseline = 'middle';
-  ctx.font = "30px Arial";
-  ctx.fillRect(10, 10, 150, 100);
-  ctx.fillStyle = 'black';*/
-  //const stack1 = createStack();
-  //printStack(stack1);
-
   document.getElementById("stack-page").style.display = "block";
+  data_structure = 1;
 }
 
-/*function createStack() {
-  let stack = [1, 2];
-  return stack;
-}*/
+function data_info(data_structure) {
+  if(data_structure==1)
+  {
+    alert('A stack is a data structure that acts as a collection of elements. Push adds an element to the top of the stack.' +
+    ' Pop removes the element at the top of the stack. Peek allows the user to see the value of the top element');
+  }
+} 
 
