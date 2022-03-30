@@ -105,3 +105,12 @@
 .show {
   display: block;
 }
+
+div.topText
+{
+  content: "Top";
+  font-size: 16px;
+  position: absolute;
+  left:100px;
+  top:150px
+}
