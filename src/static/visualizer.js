@@ -61,8 +61,11 @@ function stackTable()
 function stack_push(value){
   if(stack.length < 10){
     let new_stack_value = prompt("Please enter a value to push onto the stack:")
+    context = elem.getContext("2d");
+    context.clearRect(0, 0, canvas.width, canvas.height);
     stack.push(new_stack_value);
     top_index++;
+    stackTable();
   }
   else{
     alert("Stack length is limited to only 10 elements for this program!")
