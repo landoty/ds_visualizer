@@ -1,5 +1,6 @@
 var data_structure = 0; //Stack = 1, Queue = 2, etc..
-
+var top_X = 400;
+var top_Y = 150;
 function dropdown_buttons() {
   document.getElementById("dropdown-menu").classList.toggle("show");
 }
@@ -35,26 +36,28 @@ function data_info(data_structure) {
     ' Pop removes the element at the top of the stack. Peek allows the user to see the value of the top element');
   }
 } 
-var elem = document.getElementById('canvas');
 
+function pushValue()
+{
+  var valueTracker = []
+  var pushedValue = prompt("Enter a value to be pushed");
+
+}
 function stackTable()
 {
+  var elem = document.getElementById('canvas');
   if (data_structure==1)
   {
-    if (elem.getContext) {
-         context = elem.getContext('2d');
-         context.beginPath();
-         context.rect(400, 150, 100, 100);
-         context.rect(500, 150, 100, 100);
-         context.rect(600, 150, 100, 100);
-         context.rect(700, 150, 100, 100);
-         context.rect(800, 150, 100, 100);
-         context.rect(900, 150, 100, 100);
-         context.rect(1000, 150, 100, 100);
-         context.rect(1100, 150, 100, 100);
-         context.rect(1200, 150, 100, 100);
-         context.rect(1300, 150, 100, 100);
-         context.stroke();
-      }
-    }
+     if(elem.getContext)
+     {
+       context = elem.getContext("2d");
+       context.beginPath();
+       for(let i=0;i<10;i++)
+       {
+         context.rect(top_X,top_Y, 100, 100);
+         top_X+=100;
+        }
+        context.stroke();
+     }
   }
+}
