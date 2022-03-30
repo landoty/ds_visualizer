@@ -94,6 +94,14 @@
   margin-right: 200px;
 }
 
+.infobtn {
+  background-color: coral;
+  border-radius: 10px;
+  position: absolute;
+  left: 20px;
+  top: 70px;
+}
+
 .show {
   display: block;
 }
