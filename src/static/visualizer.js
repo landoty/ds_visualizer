@@ -108,6 +108,7 @@ function stack_peek(){
     alert("Peek can not be performed on an empty stack!");
   }
 }
+
 function startStackTable()
 {
   for(let i=0; i<10;i++)
