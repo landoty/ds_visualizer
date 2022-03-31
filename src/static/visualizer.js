@@ -106,6 +106,7 @@ function stack_peek(){
   else{
     alert("Peek can not be performed on an empty stack!");
   }
+}
 
 function startStackTable()
 {
