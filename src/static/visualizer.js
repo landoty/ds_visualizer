@@ -39,7 +39,8 @@ function data_info(data_structure) {
     alert('A stack is a data structure that acts as a collection of elements. Push adds an element to the top of the stack.' +
     ' Pop removes the element at the top of the stack. Peek allows the user to see the value of the top element');
   }
-} 
+}
+
 var elem = document.getElementById('canvas');
 
 function stackTable()
@@ -106,7 +107,7 @@ function stack_peek(){
   else{
     alert("Peek can not be performed on an empty stack!");
   }
-
+}
 function startStackTable()
 {
   for(let i=0; i<10;i++)
