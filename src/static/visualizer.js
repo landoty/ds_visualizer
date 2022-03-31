@@ -106,11 +106,6 @@ function stack_peek(){
   else{
     alert("Peek can not be performed on an empty stack!");
   }
-  for (let i=0; i<stack.length; i++){
-    let value = stack[i];
-    console.log(value);
-  }
-}
 
 function startStackTable()
 {
