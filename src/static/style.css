@@ -101,6 +101,10 @@
   margin-right: 200px;
 }
 
+.stackbtn:hover {
+  background-color: orangered;
+}
+
 .infobtn {
   background-color: coral;
   border-radius: 10px;
@@ -109,9 +113,14 @@
   top: 70px;
 }
 
+.infobtn:hover {
+  background-color: orangered;
+}
+
 .show {
   display: block;
 }
+
 div.topText
 {
   content: "Top";
