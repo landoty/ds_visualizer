@@ -83,6 +83,13 @@
   text-align: left;
 }
 
+.title-display {
+  font-size: 100px;
+  position: absolute;
+  left: 45%;
+  top: 10%
+}
+
 .stackbtn {
   background-color: coral;
   border-radius: 10px;
@@ -90,7 +97,7 @@
   height: 40px;
   position: relative;
   left: 490px;
-  top: 800px;
+  top: 750px;
   margin-right: 200px;
 }
 
