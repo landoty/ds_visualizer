@@ -196,7 +196,7 @@ function queueTable()
       {
         context.fillStyle = "black";
         context.font = "30px Arial";
-        context.fillText("FRONT", 1320, top_Y-50);
+        context.fillText("FRONT", 1330, top_Y-50);
       }
     }
   }
