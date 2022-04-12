@@ -2,7 +2,9 @@ var data_structure = 0; //Stack = 1, Queue = 2, etc..
 var top_X = 320;    //Global variable that tracks the top's x value
 const top_Y = 350;  //Global constant variable that tracks the top's y value
 var stack = [];     //Array that tracks the stack
+var queue = [];     //Array that tracks the queue
 var top_index = stack.length-1;   //Global variable that tracks the top's index
+var front_index = queue.length-1; //Global variable that tracks the front's index
 
 function dropdown_buttons() {
   document.getElementById("dropdown-menu").classList.toggle("show");
@@ -173,7 +175,82 @@ function startStackTable()
 
 function queueTable()
 {
+  if(data_structure==2)
+  {
+    if(elem.getContext)
+    {
+      context = elem.getContext("2d")
+      context.beginPath();
+      top_X = 320;
+      for(let i=0; i<queue.length; i++)
+      {
+        context.rect(top_X, top_Y, 130, 200);
+        context.fillStyle = "#FAF9F6";
+        context.fillRect(top_X, top_Y, 130, 200);
+        top_X+=130;
+      }
+      context.lineWidth = "4";
+      context.strokeStyle = "black";
+      context.stroke();
+      if(queue.length != 0)
+      {
+        context.fillStyle = "black";
+        context.font = "30px Arial";
+        context.fillText("TOP", top_X-95, top_Y-50);
+      }
+    }
+  }
+}
 
+function queue_enqueue(value)
+{
+  if(queue.length < 10)
+  {
+    let new_queue_value = prompt("Please enter a value to enqueue: ")
+    if(new_queue_value=="")
+    {
+      //If user doesn't enter anything, prompt ends
+      alert("You cannot enter a empty string!")
+      return;
+    }
+    if(new_queue_value==null)
+    {
+      return;
+    }
+    context = elem.getContext("2d");
+    context.clearRect(0, 0, canvas.width, canvas.height);
+    queue.unshift(new_queue_value);
+    front_index++;
+    queueTable();
+  }
+  else
+  {
+    alert("Queue length is limited to only 10 elements for this program!")
+  }
+}
+
+function queue_dequeue()
+{
+  if(queue.length > 0)
+  {
+
+  }
+  else
+  {
+    alert("You cannot dequeue from an empty queue!")
+  }
+}
+
+function queue_peekFront()
+{
+  if(queue.length != 0)
+  {
+    alert("The value in the front element is " + queue[front_index] + "!");
+  }
+  else
+  {
+    alert("Peek cannot be performed on an empty queue!")
+  }
 }
 
 function startQueueTable() 
