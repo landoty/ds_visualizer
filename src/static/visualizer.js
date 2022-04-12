@@ -233,7 +233,11 @@ function queue_dequeue()
 {
   if(queue.length > 0)
   {
-
+    context = elem.getContext("2d");
+    context.clearRect(0, 0, canvas.width, canvas.height);
+    queue.pop();
+    front_index--
+    queueTable();
   }
   else
   {
