@@ -31,9 +31,19 @@ window.onclick = function(event) {
 function moveToStack() {
   //Stack page is shown
   document.getElementById("stack-page").style.display = "block";
+  document.getElementById("queue-page").style.display = "none";
   data_structure = 1;
   stackTable();
   startStackTable();
+}
+
+function moveToQueue(){
+  //Queue page is shown
+  document.getElementById("queue-page").style.display = "block";
+  document.getElementById("stack-page").style.display = "none";
+  data_structure = 2;
+  queueTable();
+  startQueueTable();
 }
 
 //Provides user of information regarding the current data structure
@@ -44,6 +54,13 @@ function data_info(data_structure) {
     ' Pop removes the element at the top of the stack. Peek allows the user to see the value of the top element.' +
     ' Rectangles are drawn to represent each element in a stack. Push adds a rectangle with a value, pop removes a rectangle,' +
     ' and peek alerts the value of the top element. The top element is the most right rectangle.');
+  }
+  else if(data_structure==2)
+  {
+    alert('A queue is a data structure that acts as a collection of elements. enqueue adds an element to the back of the queue.' +
+    ' dequeue removes the element at the front of the queue. Peek front allows the user to see the value of the front element.' +
+    ' Rectangles are drawn to represent each element in a queue. Enqueue adds a rectangle with a value, dequeue removes a rectangle,' +
+    ' and peek alerts the value of the front element. The front element is the most right rectangle.');
   }
 }
 
@@ -147,6 +164,20 @@ function stack_peek(){
 
 function startStackTable() 
 //clears canvas when user first navigates to the stack page
+{
+  for(let i=0; i<10;i++)
+  {
+    context.clearRect(0, 0, canvas.width, canvas.height);
+  }
+}
+
+function queueTable()
+{
+
+}
+
+function startQueueTable() 
+//clears canvas when user first navigates to the queue page
 {
   for(let i=0; i<10;i++)
   {
