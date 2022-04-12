@@ -181,13 +181,13 @@ function queueTable()
     {
       context = elem.getContext("2d")
       context.beginPath();
-      top_X = 320;
+      top_X = 1320;
       for(let i=0; i<queue.length; i++)
       {
         context.rect(top_X, top_Y, 130, 200);
         context.fillStyle = "#FAF9F6";
         context.fillRect(top_X, top_Y, 130, 200);
-        top_X+=130;
+        top_X-=130;
       }
       context.lineWidth = "4";
       context.strokeStyle = "black";
@@ -196,7 +196,7 @@ function queueTable()
       {
         context.fillStyle = "black";
         context.font = "30px Arial";
-        context.fillText("FRONT", top_X-115, top_Y-50);
+        context.fillText("FRONT", 1320, top_Y-50);
       }
     }
   }
