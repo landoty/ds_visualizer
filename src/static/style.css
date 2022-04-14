@@ -105,6 +105,21 @@
   background-color: orangered;
 }
 
+.queuebtn {
+  background-color: coral;
+  border-radius: 10px;
+  width: 10%;
+  height: 40px;
+  position: relative;
+  left: 490px;
+  top: 750px;
+  margin-right: 200px;
+}
+
+.queuebtn:hover {
+  background-color: orangered;
+}
+
 .infobtn {
   background-color: coral;
   border-radius: 10px;
