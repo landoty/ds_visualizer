@@ -1,4 +1,4 @@
-var data_structure = 0; //Stack = 1, Queue = 2, etc..
+var data_structure = 0; //Stack = 1, Queue = 2, Linked list = 3, Binary Search Tree = 4
 var top_X = 320;    //Global variable that tracks the top's x value
 const top_Y = 350;  //Global constant variable that tracks the top's y value
 var stack = [];     //Array that tracks the stack
@@ -36,6 +36,9 @@ function moveToStack() {
   startStackTable();
 }
 
+function moveToBST() {
+  
+}
 //Provides user of information regarding the current data structure
 function data_info(data_structure) {
   if(data_structure==1)
@@ -145,7 +148,7 @@ function stack_peek(){
   }
 }
 
-function startStackTable() 
+function startStackTable()
 //clears canvas when user first navigates to the stack page
 {
   for(let i=0; i<10;i++)

@@ -23,7 +23,7 @@
           <a onClick="moveToStack()">Stack</a>
           <a>Queue</a>
           <a>Linked List</a>
-          <a>Binary Search Tree</a>
+          <a onClick="moveToBST()">Binary Search Tree</a>
         </div>
       </div>
     </div>
@@ -33,7 +33,12 @@
         <button class="stackbtn" onclick = "stack_pop()">POP</button>
         <button class="stackbtn" onclick = "stack_peek()">PEEK</button>
         <button class="infobtn" onclick="data_info(data_structure)">INFO</button>
-         
+    </div>
+    <div id="bst-page" style="display:none;">
+      <h1 class="title-display">Binary Search Tree</h1>
+      <button class="bstbtn">INSERT NODE</button>
+      <button class="bstbtn">REMOVE NODE</button>
+      <button class="bstbtn">SEARCH</button>
     </div>
     <canvas id="canvas" width="1800" height="800"></canvas>
   </body>
