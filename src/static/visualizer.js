@@ -307,10 +307,10 @@ class Node {
   draw()
   {
     this.canvas.beginPath();
-    this.canvas.arc(x, y, r, 0, 2*Math.PI);
+    this.canvas.arc(this.x, this.y, this.radius, 0, 2*Math.PI);
     this.canvas.stroke();
     this.canvas.closePath();
-    this.canvas.strokeText(data, x, y);
+    this.canvas.strokeText(this.data, this.x, this.y);
   }
 
   //get helper functions
@@ -392,10 +392,25 @@ class BinarySearchTree {
 
   add_node_to_canvas(x,y,r,ctx,data)
   {
-    let new_node = Node(x,y,r,ctx,data);
-    node.draw();
-    return node;
+    let new_node = new Node(x,y,r,ctx,data);
+    new_node.draw();
+    return new_node;
   }
 }
+
+function bst_insert()
+{
+  let value = prompt("Please enter a value to insert")
+  //BST can only add numbers due to comparison. This project will not implement operator overloads to handle comparisons
+  value = parseInt(value)
+  if(value) {
+    bst.insert(value);
+  }
+  else {
+    alert("This BST only accepts integers!");
+  }
+}
+
+let bst = new BinarySearchTree();
 
 // End of BST Visualizer Functions
