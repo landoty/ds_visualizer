@@ -380,9 +380,9 @@ class BinarySearchTree {
   //Returns depth using depth_of_node. Public
   get_depth(value)
   {
-    return(depth_of_node(this.root,value));
+    return(this.depth_of_node(this.root,value));
   }
-  
+
   //Method to insert node to bst on canvas
   insert(data) {
     //Root is non-empty
@@ -399,7 +399,6 @@ class BinarySearchTree {
   rec_insert(node, prev_node, coords, data) {
     //Reached depth of tree, add node
     if(!node) {
-      console.log("previous: " + prev_node.get_data());
       let new_node = this.add_node_to_canvas(coords.x, coords.y, 20, this.ctx, data);
       draw_line(prev_node.get_x(), prev_node.get_y(), coords.x, coords.y, prev_node.get_radius(), this.ctx);
       return new_node;
@@ -408,11 +407,9 @@ class BinarySearchTree {
       //BST's add lesser values to the left
       //For the coordinate_function params, they must be passed by ref. not by value (i.e without ())
       if(data < node.get_data()) {
-        console.log("Recurse left from " + node.get_data());
         node.left_node = this.rec_insert(node.left_node, node, node.left_child_coord(this.depth_of_node(this.root, data)), data);
       }
       else if(data > node.get_data()){
-        console.log("recurse right from " + node.get_data());
         node.right_node = this.rec_insert(node.right_node, node, node.right_child_coord(this.depth_of_node(this.root, data)), data);
       }
       return node;
@@ -421,7 +418,6 @@ class BinarySearchTree {
 
   add_node_to_canvas(x,y,r,ctx,data)
   {
-    console.log("x: " + x + "y: " + y);
     let new_node = new Node(x,y,r,ctx,data);
     new_node.draw();
     return new_node;
@@ -434,8 +430,12 @@ function bst_insert()
   //BST can only add numbers due to comparison. This project will not implement operator overloads to handle comparisons
   value = parseInt(value)
   if(value) {
-    if()
-    bst.insert(value);
+    if(bst.get_depth(value) <= 6) {
+      bst.insert(value);
+    }
+    else {
+      alert("This program is limited to a depth of 6");
+    }
   }
   else {
     alert("This BST only accepts integers!");
