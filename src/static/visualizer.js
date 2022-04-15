@@ -284,6 +284,7 @@ function startQueueTable()
 // BST Visualizer Functions
 
 /**
+  @descr - Creates, draws, and returns coordinates of child nodes
   @x - x coord of circle
   @y - y coord of circle
   @r - radius of circle
@@ -329,6 +330,24 @@ class Node {
   right_child_coord() {
     return {rx: (this.x + (3*this.radius)), ry: (this.y + (3*this.radius))}
   };
+}
+
+/**
+  @start_x : starting x coordinate
+  @start_y : starting y coordinate
+  @to_x : x coordinate to draw to
+  @to_y : y coordinate to draw to
+  @r : radius (helps to not draw into node)
+  @ctx : canvas
+**/
+draw_line(start_x, start_y, to_x, to_y, r, ctx)
+{
+  ctx.beginPath();
+  //starts at the center, bottom of parent node
+  ctx.moveTo(start_x,(start_y+r));
+  //draws to center, top of child node
+  ctx.lineTo(to_x, (to_y-r));
+  ctx.stroke();
 }
 
 
