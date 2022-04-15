@@ -314,10 +314,10 @@ class Node {
   }
 
   //get helper functions
-  get_data() { return this.data; };
-  get_x () { return this.x; };
-  get_y() { return this.y; };
-  get_radius() { return this.radius; };
+  get_data() { return this.data; }
+  get_x () { return this.x; }
+  get_y() { return this.y; }
+  get_radius() { return this.radius; }
 
   /*
     calculates and returns coordinates for child nodes
@@ -325,11 +325,11 @@ class Node {
     right: down and right 3 times the radius
   */
   left_child_coord() {
-    return {lx: (this.x - (3*this.radius)), ly: (this.y + (3*this.radius))}
-  };
+    return {x: (this.x - (3*this.radius)), y: (this.y + (3*this.radius))}
+  }
   right_child_coord() {
-    return {rx: (this.x + (3*this.radius)), ry: (this.y + (3*this.radius))}
-  };
+    return {x: (this.x + (3*this.radius)), y: (this.y + (3*this.radius))}
+  }
 }
 
 /**
@@ -340,7 +340,8 @@ class Node {
   @r : radius (helps to not draw into node)
   @ctx : canvas
 **/
-draw_line(start_x, start_y, to_x, to_y, r, ctx)
+
+function draw_line(start_x, start_y, to_x, to_y, r, ctx)
 {
   ctx.beginPath();
   //starts at the center, bottom of parent node
@@ -350,5 +351,51 @@ draw_line(start_x, start_y, to_x, to_y, r, ctx)
   ctx.stroke();
 }
 
+class BinarySearchTree {
+  //Instantiates with the html canvas and creates an empty root
+  constructor() {
+    this.canvas = document.getElementById("canvas");
+    this.ctx = this.canvas.getContext("2d");
+    this.root = null;
+  }
+  //Method to insert node to bst on canvas
+  insert(data) {
+    //Root is non-empty
+    if(this.root) {
+      this.rec_insert(this.root, null, null, data);
+    }
+    //Root is empty, add to center of canvas (also assigns call to root to keep track of non-empty)
+    else {
+      this.root = this.add_node_to_canvas(900,50,20,this.ctx,data);
+      return;
+    }
+  }
+
+  rec_insert(node, prev_node, coordinate_function, data) {
+    //Reached depth of tree, add node
+    if(!node) {
+      let coord = coordinate_function();
+      let new_node = this.add_node_to_canvas(coord.x, coord.y, 20, this.ctx, data);
+      draw_line(prev_node.get_x(), prev_node.get_y(), coord.x, coord.y, prev_node.get_radius(), ctx);
+      return new_node;
+    }
+    else {
+      //BST's add lesser values to the left
+      if(data <= prev_node.get_data()) {
+        node.left_node = this.rec_insert(node.left_node, node, node.left_child_coord(), data);
+      }
+      else {
+        node.right_node = this.rec_insert(node.right_node, node, node.right_child_coord(), data);
+      }
+    }
+  }
+
+  add_node_to_canvas(x,y,r,ctx,data)
+  {
+    let new_node = Node(x,y,r,ctx,data);
+    node.draw();
+    return node;
+  }
+}
 
 // End of BST Visualizer Functions
