@@ -85,9 +85,7 @@
 
 .title-display {
   font-size: 100px;
-  position: absolute;
-  left: 45%;
-  top: 10%
+  text-align: center;
 }
 
 .dsbutton {
@@ -97,7 +95,7 @@
   height: 40px;
   position: relative;
   left: 490px;
-  top: 750px;
+  top: 650px;
   margin-right: 200px;
 }
 
