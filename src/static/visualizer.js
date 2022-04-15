@@ -2,7 +2,9 @@ var data_structure = 0; //Stack = 1, Queue = 2, Linked list = 3, Binary Search T
 var top_X = 320;    //Global variable that tracks the top's x value
 const top_Y = 350;  //Global constant variable that tracks the top's y value
 var stack = [];     //Array that tracks the stack
+var queue = [];     //Array that tracks the queue
 var top_index = stack.length-1;   //Global variable that tracks the top's index
+var front_index = queue.length-1; //Global variable that tracks the front's index
 
 function dropdown_buttons() {
   document.getElementById("dropdown-menu").classList.toggle("show");
@@ -31,14 +33,21 @@ window.onclick = function(event) {
 function moveToStack() {
   //Stack page is shown
   document.getElementById("stack-page").style.display = "block";
+  document.getElementById("queue-page").style.display = "none";
   data_structure = 1;
   stackTable();
   startStackTable();
 }
 
-function moveToBST() {
-  
+function moveToQueue(){
+  //Queue page is shown
+  document.getElementById("queue-page").style.display = "block";
+  document.getElementById("stack-page").style.display = "none";
+  data_structure = 2;
+  queueTable();
+  startQueueTable();
 }
+
 //Provides user of information regarding the current data structure
 function data_info(data_structure) {
   if(data_structure==1)
@@ -47,6 +56,13 @@ function data_info(data_structure) {
     ' Pop removes the element at the top of the stack. Peek allows the user to see the value of the top element.' +
     ' Rectangles are drawn to represent each element in a stack. Push adds a rectangle with a value, pop removes a rectangle,' +
     ' and peek alerts the value of the top element. The top element is the most right rectangle.');
+  }
+  else if(data_structure==2)
+  {
+    alert('A queue is a data structure that acts as a collection of elements. enqueue adds an element to the back of the queue.' +
+    ' dequeue removes the element at the front of the queue. Peek front allows the user to see the value of the front element.' +
+    ' Rectangles are drawn to represent each element in a queue. Enqueue adds a rectangle with a value, dequeue removes a rectangle,' +
+    ' and peek alerts the value of the front element. The front element is the most right rectangle.');
   }
 }
 
@@ -150,6 +166,99 @@ function stack_peek(){
 
 function startStackTable()
 //clears canvas when user first navigates to the stack page
+{
+  for(let i=0; i<10;i++)
+  {
+    context.clearRect(0, 0, canvas.width, canvas.height);
+  }
+}
+
+function queueTable()
+{
+  if(data_structure==2)
+  {
+    if(elem.getContext)
+    {
+      context = elem.getContext("2d")
+      context.beginPath();
+      top_X = 1320;
+      for(let i=0; i<queue.length; i++)
+      {
+        context.rect(top_X, top_Y, 130, 200);
+        context.fillStyle = "#FAF9F6";
+        context.fillRect(top_X, top_Y, 130, 200);
+        top_X-=130;
+      }
+      context.lineWidth = "4";
+      context.strokeStyle = "black";
+      context.stroke();
+      if(queue.length != 0)
+      {
+        context.fillStyle = "black";
+        context.font = "30px Arial";
+        context.fillText("FRONT", 1330, top_Y-50);
+      }
+    }
+  }
+}
+
+function queue_enqueue(value)
+{
+  if(queue.length < 10)
+  {
+    let new_queue_value = prompt("Please enter a value to enqueue: ")
+    if(new_queue_value=="")
+    {
+      //If user doesn't enter anything, prompt ends
+      alert("You cannot enter a empty string!")
+      return;
+    }
+    if(new_queue_value==null)
+    {
+      return;
+    }
+    context = elem.getContext("2d");
+    context.clearRect(0, 0, canvas.width, canvas.height);
+    queue.unshift(new_queue_value);
+    front_index++;
+    queueTable();
+  }
+  else
+  {
+    alert("Queue length is limited to only 10 elements for this program!")
+  }
+}
+
+function queue_dequeue()
+{
+  if(queue.length > 0)
+  {
+    context = elem.getContext("2d");
+    context.clearRect(0, 0, canvas.width, canvas.height);
+    queue.pop();
+    front_index--
+    queueTable();
+  }
+  else
+  {
+    alert("You cannot dequeue from an empty queue!")
+  }
+}
+
+function queue_peekFront()
+{
+  if(queue.length != 0)
+  {
+    alert("The value in the front element is " + queue[front_index] + "!");
+  }
+  else
+  {
+    alert("Peek cannot be performed on an empty queue!")
+  }
+}
+
+function startQueueTable()
+//clears canvas when user first navigates to the queue page
 {
   for(let i=0; i<10;i++)
   {
