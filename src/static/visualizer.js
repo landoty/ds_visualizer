@@ -283,4 +283,53 @@ function startQueueTable()
 
 // BST Visualizer Functions
 
+/**
+  @x - x coord of circle
+  @y - y coord of circle
+  @r - radius of circle
+  @ctx - canvas context
+  @data - data for node to hold
+**/
+class Node {
+
+  constructor(x,y,r,ctx,data) {
+    this.left_node = null;
+    this.right_node = null;
+    this.x = x;
+    this.y = y;
+    this.radius = r;
+    this.canvas = ctx;
+    this.data = data;
+  }
+
+  // Draws node on canvas
+  draw()
+  {
+    this.canvas.beginPath();
+    this.canvas.arc(x, y, r, 0, 2*Math.PI);
+    this.canvas.stroke();
+    this.canvas.closePath();
+    this.canvas.strokeText(data, x, y);
+  }
+
+  //get helper functions
+  get_data() { return this.data; };
+  get_x () { return this.x; };
+  get_y() { return this.y; };
+  get_radius() { return this.radius; };
+
+  /*
+    calculates and returns coordinates for child nodes
+    left: down and left 3 times the radius
+    right: down and right 3 times the radius
+  */
+  left_child_coord() {
+    return {lx: (this.x - (3*this.radius)), ly: (this.y + (3*this.radius))}
+  };
+  right_child_coord() {
+    return {rx: (this.x + (3*this.radius)), ry: (this.y + (3*this.radius))}
+  };
+}
+
+
 // End of BST Visualizer Functions
