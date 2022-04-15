@@ -34,6 +34,7 @@ function moveToStack() {
   //Stack page is shown
   document.getElementById("stack-page").style.display = "block";
   document.getElementById("queue-page").style.display = "none";
+  document.getElementById("bst-page").style.display = "none";
   data_structure = 1;
   stackTable();
   startStackTable();
@@ -43,9 +44,19 @@ function moveToQueue(){
   //Queue page is shown
   document.getElementById("queue-page").style.display = "block";
   document.getElementById("stack-page").style.display = "none";
+  document.getElementById("bst-page").style.display = "none";
   data_structure = 2;
   queueTable();
   startQueueTable();
+}
+
+function moveToBST()
+{
+  //BST Page is shown
+  document.getElementById("stack-page").style.display = "none";
+  document.getElementById("queue-page").style.display = "none";
+  document.getElementById("bst-page").style.display = "block";
+  data_structure = 4;
 }
 
 //Provides user of information regarding the current data structure
