@@ -79,6 +79,7 @@ function data_info(data_structure) {
 
 var elem = document.getElementById('canvas');
 
+// Stack Visualizer Functions
 function stackTable()
 {
   if (data_structure==1)
@@ -183,7 +184,9 @@ function startStackTable()
     context.clearRect(0, 0, canvas.width, canvas.height);
   }
 }
+// End of Stack Visualizer Functions
 
+// Queue Visualizer Functions
 function queueTable()
 {
   if(data_structure==2)
@@ -276,3 +279,8 @@ function startQueueTable()
     context.clearRect(0, 0, canvas.width, canvas.height);
   }
 }
+// End of Queue Visualizer Functions
+
+// BST Visualizer Functions
+
+// End of BST Visualizer Functions
