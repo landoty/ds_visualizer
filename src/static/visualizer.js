@@ -371,6 +371,9 @@ class BinarySearchTree {
       {
         return(1+this.depth_of_node(node.right_node, value))
       }
+      else {
+        return(1);
+      }
     }
     else {
       return(1);
