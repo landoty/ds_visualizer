@@ -357,19 +357,9 @@ class BinarySearchTree {
     this.ctx = this.canvas.getContext("2d");
     this.root = null;
   }
-  //Method to insert node to bst on canvas
-  insert(data) {
-    //Root is non-empty
-    if(this.root) {
-      this.rec_insert(this.root, null, null, data);
-    }
-    //Root is empty, add to center of canvas (also assigns call to root to keep track of non-empty)
-    else {
-      this.root = this.add_node_to_canvas(900,50,20,this.ctx,data);
-      return;
-    }
-  }
+
   //Used to dynamically change length of lines connecting nodes to avoid overlap
+  //Private as starting node must be given
   depth_of_node(node, value) {
     if(node)
     {
@@ -386,6 +376,26 @@ class BinarySearchTree {
       return(1);
     }
   }
+
+  //Returns depth using depth_of_node. Public
+  get_depth(value)
+  {
+    return(depth_of_node(this.root,value));
+  }
+  
+  //Method to insert node to bst on canvas
+  insert(data) {
+    //Root is non-empty
+    if(this.root) {
+      this.rec_insert(this.root, null, null, data);
+    }
+    //Root is empty, add to center of canvas (also assigns call to root to keep track of non-empty)
+    else {
+      this.root = this.add_node_to_canvas(900,50,20,this.ctx,data);
+      return;
+    }
+  }
+
   rec_insert(node, prev_node, coords, data) {
     //Reached depth of tree, add node
     if(!node) {
@@ -424,6 +434,7 @@ function bst_insert()
   //BST can only add numbers due to comparison. This project will not implement operator overloads to handle comparisons
   value = parseInt(value)
   if(value) {
+    if()
     bst.insert(value);
   }
   else {
