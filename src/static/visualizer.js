@@ -304,8 +304,7 @@ class Node {
   }
 
   // Draws node on canvas
-  draw()
-  {
+  draw() {
     this.canvas.beginPath();
     this.canvas.arc(this.x, this.y, this.radius, 0, 2*Math.PI);
     this.canvas.stroke();
@@ -324,11 +323,11 @@ class Node {
     left: down and left 3 times the radius
     right: down and right 3 times the radius
   */
-  left_child_coord() {
-    return {x: (this.x - (3*this.radius)), y: (this.y + (3*this.radius))}
+  left_child_coord(depth) {
+    return {x: (this.x - ((20/depth)*this.radius)), y: (this.y + (3*this.radius))};
   }
-  right_child_coord() {
-    return {x: (this.x + (3*this.radius)), y: (this.y + (3*this.radius))}
+  right_child_coord(depth) {
+    return {x: (this.x + ((20/depth)*this.radius)), y: (this.y + (3*this.radius))};
   }
 }
 
@@ -370,28 +369,49 @@ class BinarySearchTree {
       return;
     }
   }
-
-  rec_insert(node, prev_node, coordinate_function, data) {
+  //Used to dynamically change length of lines connecting nodes to avoid overlap
+  depth_of_node(node, value) {
+    if(node)
+    {
+      if(value < node.get_data())
+      {
+        return(1+this.depth_of_node(node.left_node, value))
+      }
+      else if(value > node.get_data())
+      {
+        return(1+this.depth_of_node(node.right_node, value))
+      }
+    }
+    else {
+      return(1);
+    }
+  }
+  rec_insert(node, prev_node, coords, data) {
     //Reached depth of tree, add node
     if(!node) {
-      let coord = coordinate_function();
-      let new_node = this.add_node_to_canvas(coord.x, coord.y, 20, this.ctx, data);
-      draw_line(prev_node.get_x(), prev_node.get_y(), coord.x, coord.y, prev_node.get_radius(), ctx);
+      console.log("previous: " + prev_node.get_data());
+      let new_node = this.add_node_to_canvas(coords.x, coords.y, 20, this.ctx, data);
+      draw_line(prev_node.get_x(), prev_node.get_y(), coords.x, coords.y, prev_node.get_radius(), this.ctx);
       return new_node;
     }
     else {
       //BST's add lesser values to the left
-      if(data <= prev_node.get_data()) {
-        node.left_node = this.rec_insert(node.left_node, node, node.left_child_coord(), data);
+      //For the coordinate_function params, they must be passed by ref. not by value (i.e without ())
+      if(data < node.get_data()) {
+        console.log("Recurse left from " + node.get_data());
+        node.left_node = this.rec_insert(node.left_node, node, node.left_child_coord(this.depth_of_node(this.root, data)), data);
       }
-      else {
-        node.right_node = this.rec_insert(node.right_node, node, node.right_child_coord(), data);
+      else if(data > node.get_data()){
+        console.log("recurse right from " + node.get_data());
+        node.right_node = this.rec_insert(node.right_node, node, node.right_child_coord(this.depth_of_node(this.root, data)), data);
       }
+      return node;
     }
   }
 
   add_node_to_canvas(x,y,r,ctx,data)
   {
+    console.log("x: " + x + "y: " + y);
     let new_node = new Node(x,y,r,ctx,data);
     new_node.draw();
     return new_node;
