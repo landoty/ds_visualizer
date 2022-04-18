@@ -312,6 +312,16 @@ class Node {
     this.canvas.strokeText(this.data, this.x, this.y);
   }
 
+  fill() {
+    this.canvas.beginPath();
+    this.canvas.arc(this.x, this.y, this.radius, 0, 2*Math.PI);
+    this.canvas.fillStyle = "#ff7f50";
+    this.canvas.fill();
+    this.canvas.stroke();
+    this.canvas.closePath();
+    this.canvas.strokeText(this.data, this.x, this.y);
+  }
+
   //get helper functions
   get_data() { return this.data; }
   get_x () { return this.x; }
@@ -435,14 +445,17 @@ class BinarySearchTree {
 
   rec_search(node, data) {
     if(node.data == data) {
+      node.fill();
       return true;
     }
     //Recurse through left subtree if data is less than current node
     else if(data < node.data) {
+      node.fill();
       return(this.rec_search(node.left_node, data));
     }
     //Recurse through right subtree if data is greater than current node
     else {
+      node.fill();
       return(this.rec_search(node.right_node, data));
     }
     //Return false if bottom of tree has been reached and data is not seen
