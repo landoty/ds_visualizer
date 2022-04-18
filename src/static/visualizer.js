@@ -56,6 +56,7 @@ function moveToBST()
   document.getElementById("stack-page").style.display = "none";
   document.getElementById("queue-page").style.display = "none";
   document.getElementById("bst-page").style.display = "block";
+  //document.getElementById("clear_fill").style.display = "none";
   data_structure = 4;
 }
 
@@ -301,6 +302,7 @@ class Node {
     this.radius = r;
     this.canvas = ctx;
     this.data = data;
+    this.is_filled = false;
   }
 
   // Draws node on canvas
@@ -311,7 +313,7 @@ class Node {
     this.canvas.closePath();
     this.canvas.strokeText(this.data, this.x, this.y);
   }
-
+  //Fills node during search
   fill() {
     this.canvas.beginPath();
     this.canvas.arc(this.x, this.y, this.radius, 0, 2*Math.PI);
@@ -320,6 +322,18 @@ class Node {
     this.canvas.stroke();
     this.canvas.closePath();
     this.canvas.strokeText(this.data, this.x, this.y);
+    this.is_filled = true;
+  }
+  //Clears node after search
+  clear_fill() {
+    this.canvas.beginPath();
+    this.canvas.arc(this.x, this.y, this.radius, 0, 2*Math.PI);
+    this.canvas.fillStyle = "#ffffff";
+    this.canvas.fill();
+    this.canvas.stroke();
+    this.canvas.closePath();
+    this.canvas.strokeText(this.data, this.x, this.y);
+    this.is_filled = false;
   }
 
   //get helper functions
@@ -398,6 +412,8 @@ class BinarySearchTree {
 
   //Method to insert node to bst on canvas
   insert(data) {
+    //Clear filled nodes from search
+    this.clear_search(this.root);
     //Root is non-empty
     if(this.root) {
       this.rec_insert(this.root, null, null, data);
@@ -460,6 +476,26 @@ class BinarySearchTree {
     }
     //Return false if bottom of tree has been reached and data is not seen
     return false;
+  }
+
+  //Recursive function to clear filled nodes
+  clear_search(node) {
+    //Only continue with clearing if parent node is filled
+    if(node && node.is_filled)
+    {
+      //Clear current node
+      node.clear_fill();
+      //If left node exists and is filled, recurse left
+      if(node.left_node && node.left_node.is_filled)
+      {
+        this.clear_search(node.left_node);
+      }
+      //If right node exists and is filled, recurse right
+      else if(node.right_node && node.right_node.is_filled)
+      {
+        this.clear_search(node.right_node);
+      }
+    }
   }
 
   add_node_to_canvas(x,y,r,ctx,data)
