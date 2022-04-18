@@ -421,11 +421,32 @@ class BinarySearchTree {
 
   search(data) {
     if(this.root) {
-      this.rec_search(this.root,data);
+      if(this.rec_search(this.root,data)) {
+        alert(data + " is in the tree");
+      }
+      else {
+        alert(data + " is not in the tree");
+      }
     }
     else {
       alert(data + " is not in the tree");
     }
+  }
+
+  rec_search(node, data) {
+    if(node.data == data) {
+      return true;
+    }
+    //Recurse through left subtree if data is less than current node
+    else if(data < node.data) {
+      return(this.rec_search(node.left_node, data));
+    }
+    //Recurse through right subtree if data is greater than current node
+    else {
+      return(this.rec_search(node.right_node, data));
+    }
+    //Return false if bottom of tree has been reached and data is not seen
+    return false;
   }
 
   add_node_to_canvas(x,y,r,ctx,data)
