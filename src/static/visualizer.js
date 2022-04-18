@@ -419,6 +419,15 @@ class BinarySearchTree {
     }
   }
 
+  search(data) {
+    if(this.root) {
+      this.rec_search(this.root,data);
+    }
+    else {
+      alert(data + " is not in the tree");
+    }
+  }
+
   add_node_to_canvas(x,y,r,ctx,data)
   {
     let new_node = new Node(x,y,r,ctx,data);
@@ -442,6 +451,17 @@ function bst_insert()
   }
   else {
     alert("This BST only accepts integers!");
+  }
+}
+
+function bst_search() {
+  let value = prompt("Please enter a value to search for");
+  value = parseInt(value);
+  if(value){
+    bst.search(value);
+  }
+  else {
+    alert("This BST only accepts integers");
   }
 }
 
