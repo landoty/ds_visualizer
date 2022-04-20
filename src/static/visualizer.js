@@ -533,7 +533,7 @@ class BinarySearchTree {
         return null;
       }
       //Single left child
-      else if(node.left_node) {
+      else if(!node.right_node) {
         //Remove left child from canvas
         this.canvas_remove("left", node.left_node);
         //update data and unlink left node
@@ -543,7 +543,7 @@ class BinarySearchTree {
         return node;
       }
       //Single right child
-      else if(node.right_node) {
+      else if(!node.left_node) {
         //Remove right child from canvas
         this.canvas_remove("right", node.right_node);
         //Update data and unlink right node
@@ -559,9 +559,9 @@ class BinarySearchTree {
         node.data = tmp.data;
         node.update_data();
         //Remove replacement candidate from tree
-        this.rec_remove(node.right_node, "right", tmp.data);
+        node.right_node = this.rec_remove(node.right_node, "right", tmp.data);
         //Remove candidate from canvas
-        this.canvas_remove("left", tmp);
+        //this.canvas_remove("left", tmp);
         return node;
       }
     }
@@ -601,8 +601,8 @@ class BinarySearchTree {
   }
   //Returns smallest value given a tree
   smallest_node(node) {
-    while(!(node.left_node == null)) {
-      node = node.left_node;
+    if(!(node.left_node == null)) {
+      return smallest_node(node.left_node)
     }
     return node;
   }
