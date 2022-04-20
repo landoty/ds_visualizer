@@ -335,6 +335,11 @@ class Node {
     this.canvas.strokeText(this.data, this.x, this.y);
     this.is_filled = false;
   }
+  //Helper function for BST remove that updates the value in the node
+  update_data() {
+    this.canvas.clearRect(this.x, this.y-10, 12, 12);
+    this.canvas.strokeText(this.data, this.x, this.y);
+  }
 
   //get helper functions
   get_data() { return this.data; }
@@ -377,8 +382,9 @@ function draw_line(start_x, start_y, to_x, to_y, r, ctx)
 class BinarySearchTree {
   //Instantiates with the html canvas and creates an empty root
   constructor() {
-    this.canvas = document.getElementById("canvas");
-    this.ctx = this.canvas.getContext("2d");
+    canvas = document.getElementById("canvas");
+    this.ctx = canvas.getContext("2d");
+    //Keeps track of order of inserts
     this.root = null;
   }
 
@@ -497,7 +503,109 @@ class BinarySearchTree {
       }
     }
   }
-
+  //Standard remove on a BST, but must account for changing the web UI
+  remove(data) {
+    //Root is empty -> tree is empty
+    if(!this.root) {
+      alert("Tree is empty!");
+    }
+    else {
+      this.root = this.rec_remove(this.root, null, data);
+      this.root == null ? null : this.root.update_data();
+    }
+  }
+  /*
+    Recursive remove. Note that removing a node from the backend BST
+    is different than removing it from the canvas, hence the seperate function.
+    Any time a remove is compeleted, some node must be removed from the canvas
+    even if its value still remains in a new place. Every time a node.data
+    assignment is completed, node.update_data() must be called to update the
+    data seen on the canvas
+  */
+  rec_remove(node, direction, data) {
+    if(!node) { return null; }
+    //Found node to remove. Return data and handle UI changes
+    if(node.data == data) {
+      //No children
+      if(!node.left_node && !node.right_node) {
+        //Remove self from canvas
+        this.canvas_remove(direction, node);
+        return null;
+      }
+      //Single left child
+      else if(node.left_node) {
+        //Remove left child from canvas
+        this.canvas_remove("left", node.left_node);
+        //update data and unlink left node
+        node.data = node.left_node.data;
+        node.update_data();
+        node.left_node = null;
+        return node;
+      }
+      //Single right child
+      else if(node.right_node) {
+        //Remove right child from canvas
+        this.canvas_remove("right", node.right_node);
+        //Update data and unlink right node
+        node.data = node.right_node.data;
+        node.update_data();
+        node.right_node = null;
+        return node;
+      }
+      //Two children
+      else {
+        //Find replacement candidate (smallest of the RST)
+        let tmp = this.smallest_node(node.right_node);
+        node.data = tmp.data;
+        node.update_data();
+        //Remove replacement candidate from tree
+        this.rec_remove(node.right_node, "right", tmp.data);
+        //Remove candidate from canvas
+        this.canvas_remove("left", tmp);
+        return node;
+      }
+    }
+    else if(data < node.data){
+      node.left_node = this.rec_remove(node.left_node, "left", data);
+      node == null ? null : node.update_data();
+      return node;
+    }
+    else {
+      node.right_node = this.rec_remove(node.right_node, "right", data);
+      node == null ? null : node.update_data();
+      return node;
+    }
+  }
+  canvas_remove(direction, node) {
+    //clear node from canvas (clearRect starts at top left corner)
+    //Each of these calculations are the same regardless of position
+    let width = (20*node.radius/(this.depth_of_node(this.root, node.data)))+node.radius+5;
+    let height = 3*node.radius + 5;
+    let y = node.y - 1.5*node.radius - 10;
+    let x;
+    if(direction == "left") {
+      x = node.x - node.radius - 5;
+    }
+    else if(direction == "right") {
+      x = node.x - ((20*node.radius)/(this.depth_of_node(this.root, (node.data))));
+    }
+    //Clear entire canvas
+    else {
+      x = 0;
+      y = 0;
+      width = canvas.width;
+      height = canvas.height;
+    }
+    //console.log("Clearing rect: " + " " + x + " "+ y + " "+ width + " "+ height)
+    this.ctx.clearRect(x,y,width,height);
+  }
+  //Returns smallest value given a tree
+  smallest_node(node) {
+    while(!(node.left_node == null)) {
+      node = node.left_node;
+    }
+    return node;
+  }
   add_node_to_canvas(x,y,r,ctx,data)
   {
     let new_node = new Node(x,y,r,ctx,data);
@@ -529,6 +637,17 @@ function bst_search() {
   value = parseInt(value);
   if(value){
     bst.search(value);
+  }
+  else {
+    alert("This BST only accepts integers");
+  }
+}
+
+function bst_remove() {
+  let value = prompt("Plese enter a value to remove");
+  value = parseInt(value);
+  if(value) {
+    bst.remove(value);
   }
   else {
     alert("This BST only accepts integers");
