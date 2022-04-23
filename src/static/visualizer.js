@@ -587,7 +587,7 @@ class BinarySearchTree {
       x = node.x - node.radius - 5;
     }
     else if(direction == "right") {
-      x = node.x - ((20*node.radius)/(this.depth_of_node(this.root, (node.data))));
+      x = node.x - ((20*node.radius)/(this.depth_of_node(this.root, node.data))) + node.radius - 5;
     }
     //Clear entire canvas
     else {
@@ -602,7 +602,7 @@ class BinarySearchTree {
   //Returns smallest value given a tree
   smallest_node(node) {
     if(!(node.left_node == null)) {
-      return smallest_node(node.left_node)
+      return this.smallest_node(node.left_node)
     }
     return node;
   }
@@ -620,11 +620,11 @@ function bst_insert()
   //BST can only add numbers due to comparison. This project will not implement operator overloads to handle comparisons
   value = parseInt(value)
   if(value) {
-    if(bst.get_depth(value) <= 6) {
+    if(bst.get_depth(value) <= 4) {
       bst.insert(value);
     }
     else {
-      alert("This program is limited to a depth of 6");
+      alert("This program is limited to a depth of 4");
     }
   }
   else {
